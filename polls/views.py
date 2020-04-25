@@ -53,29 +53,32 @@ def list_by_user(request):
     return render(request, 'polls/polls_list.html', context)
 
 
-@login_required
+@login_required()
 def polls_add(request):
-    if request.method == 'POST':
-        form = PollAddForm(request.POST)
-        if form.is_valid:
-            poll = form.save(commit=False)
-            poll.owner = request.user
-            poll.save()
-            new_choice1 = Choice(
-                poll=poll, choice_text=form.cleaned_data['choice1']).save()
-            new_choice2 = Choice(
-                poll=poll, choice_text=form.cleaned_data['choice2']).save()
+    if request.user.has_perm('polls.add_poll'):
+        if request.method == 'POST':
+            form = PollAddForm(request.POST)
+            if form.is_valid:
+                poll = form.save(commit=False)
+                poll.owner = request.user
+                poll.save()
+                new_choice1 = Choice(
+                    poll=poll, choice_text=form.cleaned_data['choice1']).save()
+                new_choice2 = Choice(
+                    poll=poll, choice_text=form.cleaned_data['choice2']).save()
 
-            messages.success(
-                request, "Poll & Choices added successfully", extra_tags='alert alert-success alert-dismissible fade show')
+                messages.success(
+                    request, "Poll & Choices added successfully", extra_tags='alert alert-success alert-dismissible fade show')
 
-            return redirect('polls:list')
-    else:
-        form = PollAddForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'polls/add_poll.html', context)
+                return redirect('polls:list')
+        else:
+            form = PollAddForm()
+        context = {
+            'form': form,
+        }
+        return render(request, 'polls/add_poll.html', context)
+    else: 
+        return HttpResponse("Sorry but you don't have permission to do that!")
 
 
 @login_required
