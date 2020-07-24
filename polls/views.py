@@ -5,6 +5,7 @@ from django.db.models import Count
 from django.contrib import messages
 from .models import Poll, Choice, Vote
 from .forms import PollAddForm, EditPollForm, ChoiceAddForm
+from django.http import HttpResponse
 
 
 @login_required()
