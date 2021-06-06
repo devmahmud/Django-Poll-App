@@ -69,7 +69,7 @@ def polls_add(request):
                     poll=poll, choice_text=form.cleaned_data['choice2']).save()
 
                 messages.success(
-                    request, "Poll & Choices added successfully", extra_tags='alert alert-success alert-dismissible fade show')
+                    request, "Poll & Choices added successfully.", extra_tags='alert alert-success alert-dismissible fade show')
 
                 return redirect('polls:list')
         else:
@@ -78,7 +78,7 @@ def polls_add(request):
             'form': form,
         }
         return render(request, 'polls/add_poll.html', context)
-    else: 
+    else:
         return HttpResponse("Sorry but you don't have permission to do that!")
 
 
@@ -92,7 +92,7 @@ def polls_edit(request, poll_id):
         form = EditPollForm(request.POST, instance=poll)
         if form.is_valid:
             form.save()
-            messages.success(request, "Poll Updated successfully",
+            messages.success(request, "Poll Updated successfully.",
                              extra_tags='alert alert-success alert-dismissible fade show')
             return redirect("polls:list")
 
@@ -108,7 +108,7 @@ def polls_delete(request, poll_id):
     if request.user != poll.owner:
         return redirect('home')
     poll.delete()
-    messages.success(request, "Poll Deleted successfully",
+    messages.success(request, "Poll Deleted successfully.",
                      extra_tags='alert alert-success alert-dismissible fade show')
     return redirect("polls:list")
 
@@ -126,7 +126,7 @@ def add_choice(request, poll_id):
             new_choice.poll = poll
             new_choice.save()
             messages.success(
-                request, "Choice added successfully", extra_tags='alert alert-success alert-dismissible fade show')
+                request, "Choice added successfully.", extra_tags='alert alert-success alert-dismissible fade show')
             return redirect('polls:edit', poll.id)
     else:
         form = ChoiceAddForm()
@@ -150,7 +150,7 @@ def choice_edit(request, choice_id):
             new_choice.poll = poll
             new_choice.save()
             messages.success(
-                request, "Choice Updated successfully", extra_tags='alert alert-success alert-dismissible fade show')
+                request, "Choice Updated successfully.", extra_tags='alert alert-success alert-dismissible fade show')
             return redirect('polls:edit', poll.id)
     else:
         form = ChoiceAddForm(instance=choice)
@@ -170,7 +170,7 @@ def choice_delete(request, choice_id):
         return redirect('home')
     choice.delete()
     messages.success(
-        request, "Choice Deleted successfully", extra_tags='alert alert-success alert-dismissible fade show')
+        request, "Choice Deleted successfully.", extra_tags='alert alert-success alert-dismissible fade show')
     return redirect('polls:edit', poll.id)
 
 
@@ -193,7 +193,7 @@ def poll_vote(request, poll_id):
     choice_id = request.POST.get('choice')
     if not poll.user_can_vote(request.user):
         messages.error(
-            request, "You already voted this poll", extra_tags='alert alert-warning alert-dismissible fade show')
+            request, "You already voted this poll!", extra_tags='alert alert-warning alert-dismissible fade show')
         return redirect("polls:list")
 
     if choice_id:
@@ -204,7 +204,7 @@ def poll_vote(request, poll_id):
         return render(request, 'polls/poll_result.html', {'poll': poll})
     else:
         messages.error(
-            request, "No choice selected", extra_tags='alert alert-warning alert-dismissible fade show')
+            request, "No choice selected!", extra_tags='alert alert-warning alert-dismissible fade show')
         return redirect("polls:detail", poll_id)
     return render(request, 'polls/poll_result.html', {'poll': poll})
 

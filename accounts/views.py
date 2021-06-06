@@ -17,7 +17,7 @@ def login_user(request):
             redirect_url = request.GET.get('next', 'home')
             return redirect(redirect_url)
         else:
-            messages.error(request, "Username Or Password is incorrect!!",
+            messages.error(request, "Username Or Password is incorrect!",
                            extra_tags='alert alert-warning alert-dismissible fade show')
 
     return render(request, 'accounts/login.html')
@@ -42,26 +42,26 @@ def create_user(request):
 
             if password1 != password2:
                 check1 = True
-                messages.error(request, 'Password doesn\'t matched',
+                messages.error(request, 'Password did not match!',
                                extra_tags='alert alert-warning alert-dismissible fade show')
             if User.objects.filter(username=username).exists():
                 check2 = True
-                messages.error(request, 'Username already exists',
+                messages.error(request, 'Username already exists!',
                                extra_tags='alert alert-warning alert-dismissible fade show')
             if User.objects.filter(email=email).exists():
                 check3 = True
-                messages.error(request, 'Email already registered',
+                messages.error(request, 'Email already registered!',
                                extra_tags='alert alert-warning alert-dismissible fade show')
 
             if check1 or check2 or check3:
                 messages.error(
-                    request, "Registration Failed", extra_tags='alert alert-warning alert-dismissible fade show')
+                    request, "Registration Failed!", extra_tags='alert alert-warning alert-dismissible fade show')
                 return redirect('accounts:register')
             else:
                 user = User.objects.create_user(
                     username=username, password=password1, email=email)
                 messages.success(
-                    request, f'Thanks for registering {user.username}!', extra_tags='alert alert-success alert-dismissible fade show')
+                    request, f'Thanks for registering {user.username}.', extra_tags='alert alert-success alert-dismissible fade show')
                 return redirect('accounts:login')
     else:
         form = UserRegistrationForm()
