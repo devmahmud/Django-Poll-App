@@ -4,9 +4,9 @@ from .models import Poll, Choice
 
 class PollAddForm(forms.ModelForm):
 
-    choice1 = forms.CharField(label='Choice 1', max_length=100, min_length=2,
+    choice1 = forms.CharField(label='Choice 1', max_length=100, min_length=1,
                               widget=forms.TextInput(attrs={'class': 'form-control'}))
-    choice2 = forms.CharField(label='Choice 2', max_length=100, min_length=2,
+    choice2 = forms.CharField(label='Choice 2', max_length=100, min_length=1,
                               widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     class Meta:
