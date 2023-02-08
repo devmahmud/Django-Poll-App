@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.utils import timezone
 
-from .models import Poll, Choice, Vote
+from .models import Poll, Vote
 
 
 class PollModelTest(TestCase):
@@ -24,16 +24,21 @@ class PollViewTest(TestCase):
 
     def test_login(self):
         User.objects.create_user(username='john', password='rambo')
-        response = self.client.post('/accounts/login/', {'username': 'john', 'password': 'rambo'})
+        response = self.client.post(
+            '/accounts/login/', {'username': 'john', 'password': 'rambo'}
+        )
         self.assertRedirects(response, '/')
 
     def test_register(self):
-        # print(response.context['messages'])
-        response = self.client.post('/accounts/register/', {'username': 'johny',
-                                                            'password1': 'rambo',
-                                                            'password2': 'rambo',
-                                                            'email': 'johny.rambo@usarmy.gov'
-                                                            })
+        response = self.client.post(
+            '/accounts/register/',
+            {
+                'username': 'johny',
+                'password1': 'rambo',
+                'password2': 'rambo',
+                'email': 'johny.rambo@usarmy.gov',
+            },
+        )
         self.assertRedirects(response, '/accounts/login/')
         # assert that user got actually created in the backend
         self.assertIsNotNone(authenticate(username='johny', password='rambo'))
