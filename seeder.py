@@ -13,7 +13,7 @@ def seed_users(num_entries=10, overwrite=False):
     """
     if overwrite:
         print("Overwriting Users")
-        Users.objects.all().delete()
+        User.objects.all().delete()
     count = 0
     for _ in range(num_entries):
         first_name = fake.first_name()
