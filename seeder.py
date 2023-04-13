@@ -13,7 +13,7 @@ def seed_users(num_entries=10, overwrite=False):
     """
     if overwrite:
         print("Overwriting Users")
-        Users.objects.all().delete()
+        User.objects.all().delete() # Fixed naming convention here
     count = 0
     for _ in range(num_entries):
         first_name = fake.first_name()
@@ -34,6 +34,7 @@ def seed_users(num_entries=10, overwrite=False):
             flush=True
         )
     print()
+
 
 
 def seed_polls(num_entries=10, choice_min=2, choice_max=5, overwrite=False):
