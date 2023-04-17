@@ -1,34 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <div class="row center">
-        <div class="col-md-6 offset-md-3">
+    <div class="vh-100 d-flex justify-content-center align-items-center p-5" id="login-content">
+        <div class="col-md-5 p-5 shadow-sm border rounded-5 border-primary bg-white">
+            <h2 class="text-center mb-4 text-primary">Login</h2>
             {% if messages %}
-            <div class="messages">
-                {% for message in messages %}
-                <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="messages">
+                    {% for message in messages %}
+                        <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
             {% endif %}
-            <form action="" method="POST">
+            <form action="" method="post">
                 {% csrf_token %}
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" name="username" placeholder="Enter Username" required>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control border border-primary" id="username"
+                           aria-describedby="username" name="username" placeholder="Enter Username" required>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control border border-primary" name="password"
+                           placeholder="Password" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-                <p>Need an account? <a href="{% url 'accounts:register' %}">Register Here</a></p>
+                <div class="d-grid">
+                    <button class="btn btn-primary" type="submit">Login</button>
+                </div>
             </form>
+            <div class="mt-3">
+                <p class="mb-0  text-center">Don't have an account? <a href="{% url 'accounts:register' %}"
+                                                                       class="text-primary fw-bold">Sign
+                    Up</a></p>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
