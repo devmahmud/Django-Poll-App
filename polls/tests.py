@@ -1,43 +1,44 @@
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 from django.test import TestCase
-import datetime
-
 from django.utils import timezone
-from django.urls import reverse
 
-from .models import Question
-
-
-class QuestionModelTest(TestCase):
-    def test_was_published_recently_with_future_question(self):
-        time = timezone.now() + datetime.timedelta(days=30)
-        future_question = Question(pub_date=time)
-        self.assertIs(future_question.was_published_recently(), False)
-
-        """
-      was_published_recently() returns False for questions whose pub_date
-      is older than 1 day.
-       """
+from .models import Poll, Vote
 
 
-def test_was_published_recently_with_old_question(self):
-    """
-    was_published_recently() returns False for questions whose pub_date
-    is older than 1 day.
-    """
-    time = timezone.now() - datetime.timedelta(days=1, seconds=1)
-    old_question = Question(pub_date=time)
-    self.assertIs(old_question.was_published_recently(), False)
+class PollModelTest(TestCase):
+    def test_user_can_vote(self):
+        user = User.objects.create_user('john')
+        poll = Poll.objects.create(owner=user)
+        self.assertTrue(poll.user_can_vote(user))
+
+        choice = poll.choice_set.create(choice_text='pizza')
+        Vote.objects.create(user=user, poll=poll, choice=choice)
+        self.assertFalse(poll.user_can_vote(user))
 
 
-def test_was_published_recently_with_recent_question(self):
-    """
-    was_published_recently() returns True for questions whose pub_date
-    is within the last day.
-    """
-    time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
-    recent_question = Question(pub_date=time)
-    self.assertIs(recent_question.was_published_recently(), True)
+class PollViewTest(TestCase):
+    def test_home(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
 
+    def test_login(self):
+        User.objects.create_user(username='john', password='rambo')
+        response = self.client.post(
+            '/accounts/login/', {'username': 'john', 'password': 'rambo'}
+        )
+        self.assertRedirects(response, '/')
 
-
-# Create your tests here.
+    def test_register(self):
+        response = self.client.post(
+            '/accounts/register/',
+            {
+                'username': 'johny',
+                'password1': 'rambo',
+                'password2': 'rambo',
+                'email': 'johny.rambo@usarmy.gov',
+            },
+        )
+        self.assertRedirects(response, '/accounts/login/')
+        # assert that user got actually created in the backend
+        self.assertIsNotNone(authenticate(username='johny', password='rambo'))
