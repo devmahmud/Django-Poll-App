@@ -63,9 +63,9 @@ def polls_add(request):
                 poll = form.save(commit=False)
                 poll.owner = request.user
                 poll.save()
-                new_choice1 = Choice(
+                Choice(
                     poll=poll, choice_text=form.cleaned_data['choice1']).save()
-                new_choice2 = Choice(
+                Choice(
                     poll=poll, choice_text=form.cleaned_data['choice2']).save()
 
                 messages.success(
@@ -210,7 +210,7 @@ def poll_vote(request, poll_id):
 
 
 @login_required
-def endpoll(request, poll_id):
+def end_poll(request, poll_id):
     poll = get_object_or_404(Poll, pk=poll_id)
     if request.user != poll.owner:
         return redirect('home')
