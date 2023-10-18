@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-sm-2">
-            <h1 class="text-center mt-3 mb-3">Welcome to polls List!</h1>
+            <h1 class="text-center mb-5">Welcome to polls List!</h1>
             {% if messages %}
             <div class="messages">
                 {% for message in messages %}
@@ -54,6 +54,7 @@
 
                 {% endfor %}
             </ul>
+            {% if polls.paginator.num_pages > 1 %}
             <nav class="mt-3">
                 <ul class="pagination">
                     {% if polls.has_previous %}
@@ -69,6 +70,7 @@
                     {% endif %}
                 </ul>
             </nav>
+            {% endif %}
         </div>
     </div>
 </div>
