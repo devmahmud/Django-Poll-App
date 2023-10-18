@@ -9,6 +9,7 @@ class Poll(models.Model):
     text = models.TextField()
     pub_date = models.DateTimeField(default=timezone.now)
     active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def user_can_vote(self, user):
         """ 
@@ -50,6 +51,8 @@ class Poll(models.Model):
 class Choice(models.Model):
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     @property
     def get_vote_count(self):
@@ -63,6 +66,8 @@ class Vote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'{self.poll.text[:15]} - {self.choice.choice_text[:15]} - {self.user.username}'

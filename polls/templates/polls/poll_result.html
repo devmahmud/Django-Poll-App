@@ -18,7 +18,7 @@
             {% if poll.active %}
             <h3 class="mt-3 mb-3 text-center">Result for: {{ poll.text }}</h3>
             {% else %}
-            <h3 class="mt-3 mb-3 text-center">"{{ poll.text }}" Has Ended Polling !</h3>
+            <h3 class="mt-3 mb-3 text-center">"{{ poll.text }}" Has Ended Polling!</h3>
             {% endif %}
             <h3 class="mb-2 text-center">Total: {{ poll.get_vote_count }} votes</h3>
             <!-- progress bar -->
