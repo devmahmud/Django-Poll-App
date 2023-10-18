@@ -31,7 +31,7 @@ def polls_list(request):
 
     get_dict_copy = request.GET.copy()
     params = get_dict_copy.pop('page', True) and get_dict_copy.urlencode()
-    print(params)
+
     context = {
         'polls': polls,
         'params': params,
