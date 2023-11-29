@@ -86,6 +86,15 @@ Django poll app is a full featured polling app. You have to register in this app
   Email: expelmahmud@gmail.com
 </blockquote>
 
+
+<h2>Note</h2>
+<p>Dont forget to create .env file </p>
+<p>this should be inside the .env</p>
+```
+export EMAIL_HOST_USER="your email address"
+export EMAIL_HOST_PASSWORD="your email password"
+export EMAIL_PORT=your email port=
+```
 <div align="center">
     <h3>========Thank You !!!=========</h3>
 </div>
