@@ -64,10 +64,8 @@ To use Google's OAuth authentication in your application, you need to obtain a c
    - Once the OAuth client is created, you'll see your client ID and client secret.
    - Copy these values and update following variables in settings.py
 
-        <code>
-        SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =  'your-client-id'
-        SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET ='your-client-secret'
-        </code>
+        <code>SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =  'your-client-id'
+        SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET ='your-client-secret'</code>
 
 For detailed instructions, refer to Google's documentation on [OAuth 2.0](https://developers.google.com/identity/protocols/oauth2).
 
