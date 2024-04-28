@@ -29,6 +29,48 @@ Django poll app is a full featured polling app. You have to register in this app
 <code>seeder.seed_all(30)</code>
 <p>Here 30 is a number of entry. You can use it as your own</p>
 
+<h2>Obtaining OAuth Client ID for Google:</h2>
+
+To use Google's OAuth authentication in your application, you need to obtain a client ID and client secret. Follow these steps to get your OAuth client ID for Google:
+
+1. **Go to the Google Cloud Console:**
+   - Navigate to [Google Cloud Console](https://console.cloud.google.com/).
+   - Sign in with your Google account.
+
+2. **Create a new project:**
+   - Click on the project dropdown menu at the top of the page.
+   - Click on "New Project" and follow the prompts to create a new project.
+
+3. **Enable the Google Identity service:**
+   - In the Google Cloud Console, navigate to "APIs & Services" > "Dashboard."
+   - Click on "Enable APIs and Services."
+   - Search for "Google Identity" or "Google+ API" and enable it for your project.
+
+4. **Create OAuth consent screen:**
+   - In the Google Cloud Console, navigate to "APIs & Services" > "OAuth consent screen."
+   - Fill in the required fields (like application name, user support email, etc.).
+   - Add scopes (permissions) your application requires.
+   - Save the consent screen information.
+
+5. **Create OAuth credentials:**
+   - In the Google Cloud Console, navigate to "APIs & Services" > "Credentials."
+   - Click on "Create Credentials" > "OAuth client ID."
+   - Select "Web application" as the application type.
+   - Enter a name for your OAuth client.
+   - Add authorized redirect URIs : `http://127.0.0.1:8000/complete/google-oauth2/`
+   - Click "Create."
+
+6. **Copy the client ID and client secret:**
+   - Once the OAuth client is created, you'll see your client ID and client secret.
+   - Copy these values and update following variables in settings.py
+
+        <code>
+        SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =  'your-client-id'
+        SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET ='your-client-secret'
+        </code>
+
+For detailed instructions, refer to Google's documentation on [OAuth 2.0](https://developers.google.com/identity/protocols/oauth2).
+
 <h2> To run the program in local server use the following command </h2>
 <code>python manage.py runserver</code>
 
