@@ -3,6 +3,9 @@
 {% block content %}
     <div class="vh-100 d-flex justify-content-center align-items-center p-5" id="login-content">
         <div class="col-md-5 p-5 shadow-sm border rounded-5 border-primary bg-white">
+           
+            <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
+
             <h2 class="text-center mb-4 text-primary">Login</h2>
             {% if messages %}
                 <div class="messages">
