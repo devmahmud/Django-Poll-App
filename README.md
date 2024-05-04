@@ -29,9 +29,9 @@ Django poll app is a full featured polling app. You have to register in this app
 <code>seeder.seed_all(30)</code>
 <p>Here 30 is a number of entry. You can use it as your own</p>
 
-<h2>Obtaining OAuth Client ID for Google:</h2>
-
-To use Google's OAuth authentication in your application, you need to obtain a client ID and client secret. Follow these steps to get your OAuth client ID for Google:
+<h2> Configuring OAuth login </h2>
+<details>
+<summary>Obtaining OAuth Client ID for Google</summary>
 
 1. **Go to the Google Cloud Console:**
    - Navigate to [Google Cloud Console](https://console.cloud.google.com/).
@@ -62,12 +62,34 @@ To use Google's OAuth authentication in your application, you need to obtain a c
 
 6. **Copy the client ID and client secret:**
    - Once the OAuth client is created, you'll see your client ID and client secret.
-   - Copy these values and update following variables in settings.py
+   - Copy these values and update the following variables in settings.py
 
-        <code>SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =  'your-client-id'
-        SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET ='your-client-secret'</code>
+        ```
+        SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'your-client-id'
+        SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'your-client-secret'
+        ```
 
 For detailed instructions, refer to Google's documentation on [OAuth 2.0](https://developers.google.com/identity/protocols/oauth2).
+</details>
+
+
+<details>
+  <summary>Obtaining OAuth Client ID for LinkedIn</summary>
+
+  ### Step 1: Create a LinkedIn App
+  1. Go to the [LinkedIn Developer Portal](https://www.linkedin.com/developers/) and sign in.
+  2. Click on "Create App" and fill in the required details, such as the app name, description, and logo.
+  3. In the "Authorized Redirect URLs" section, add the callback URL for your Django app. This URL will be like `http://127.0.0.1:8000/complete/linkedin/`.
+  4. Save the changes and note down the Client ID and Client Secret provided by LinkedIn.
+
+  ### Step 2: Configure Django Settings
+  
+    1. Update the following settings to your settings file, replacing `'your-linkedin-client-id'` and `'your-linkedin-client-secret'` with your actual LinkedIn app credentials:
+     ```python
+     SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = 'your-client-id'
+     SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = 'your-client-secret'
+     ```
+</details>
 
 <h2> To run the program in local server use the following command </h2>
 <code>python manage.py runserver</code>
