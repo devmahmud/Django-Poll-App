@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 {% block content %}
     <div class="vh-100 d-flex justify-content-center align-items-center p-5" id="login-content">
         <div class="col-md-5 p-5 shadow-sm border rounded-5 border-primary bg-white">
            
-            <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
-
+            <div class="social-login">
+                <a href="{% url 'social:begin' 'google-oauth2' %}" class="social-login-link" data-tooltip="Login with Google">
+                    Login with <i class="fab fa-google social-login-icon"></i>oogle
+                </a>
+                <a href="{% url 'social:begin' 'linkedin-oauth2' %}" class="social-login-link" data-tooltip="Login with LinkedIn">
+                    Login with Linked<i class="fab fa-linkedin-in social-login-icon"></i>
+                </a>
+            </div>
             <h2 class="text-center mb-4 text-primary">Login</h2>
             {% if messages %}
                 <div class="messages">
