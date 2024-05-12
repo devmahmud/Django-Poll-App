@@ -31,7 +31,8 @@ Django poll app is a full featured polling app. You have to register in this app
 
 <h2> Configuring OAuth login </h2>
 <details>
-<summary>Obtaining OAuth Client ID for Google</summary>
+    <summary>Obtaining OAuth Client ID for Google</summary>
+
 
 1. **Go to the Google Cloud Console:**
    - Navigate to [Google Cloud Console](https://console.cloud.google.com/).
@@ -72,7 +73,29 @@ Django poll app is a full featured polling app. You have to register in this app
 For detailed instructions, refer to Google's documentation on [OAuth 2.0](https://developers.google.com/identity/protocols/oauth2).
 </details>
 
+<details>
+   <summary>Obtaining OAuth Client ID for Facebook</summary>
+   
+1. **Create a Facebook App:**
+   - Go to the [Facebook Developers](https://developers.facebook.com/) website and log in.
+   - Click on "My Apps" and then "Create App".
+   - Enter the required information for your app (display name, contact email, etc.) and create the app.
 
+2. **Configure Basic Settings:**
+   - In your app dashboard, go to Settings > Basic.
+   - Add a platform (select Website) and enter your site URL(http://127.0.0.1:8000/complete/facebook/).
+   - Save your changes.
+
+3. **Get App ID and App Secret:**
+    
+    - Update the following settings to your settings file, replacing `'your-facebook-client-id'` and `'your-facebook-client-secret'` with your actual LinkedIn app credentials:
+     ```python
+        SOCIAL_AUTH_FACEBOOK_OAUTH2_KEY = 'your-client-id'
+        SOCIAL_AUTH_FACEBOOK_OAUTH2_SECRET = 'your-client-secret'
+     ```
+
+
+</details>
 <details>
   <summary>Obtaining OAuth Client ID for LinkedIn</summary>
 
