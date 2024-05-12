@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.linkedin.LinkedinOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -137,6 +138,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =  'your-client-id'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET ='your-client-secret'
 SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = 'your-client-id'
 SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = 'your-client-secret'
+SOCIAL_AUTH_FACEBOOK_OAUTH2_KEY = 'your-client-id'
+SOCIAL_AUTH_FACEBOOK_OAUTH2_SECRET = 'your-client-secret'
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/polls/list/user/'
