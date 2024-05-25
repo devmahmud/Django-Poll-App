@@ -130,10 +130,7 @@ def add_choice(request, poll_id):
             return redirect('polls:edit', poll.id)
     else:
         form = ChoiceAddForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'polls/add_choice.html', context)
+    return render(request, 'polls/add_choice.html', {'form': form})
 
 
 @login_required
@@ -206,7 +203,6 @@ def poll_vote(request, poll_id):
         messages.error(
             request, "No choice selected!", extra_tags='alert alert-warning alert-dismissible fade show')
         return redirect("polls:detail", poll_id)
-    return render(request, 'polls/poll_result.html', {'poll': poll})
 
 
 @login_required

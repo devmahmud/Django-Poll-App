@@ -134,12 +134,13 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =  'your-client-id'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET ='your-client-secret'
-SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = 'your-client-id'
-SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = 'your-client-secret'
-SOCIAL_AUTH_FACEBOOK_OAUTH2_KEY = 'your-client-id'
-SOCIAL_AUTH_FACEBOOK_OAUTH2_SECRET = 'your-client-secret'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =  os.environ.get('GOOGLE_OAUTH2_KEY') if os.environ.get('GOOGLE_OAUTH2_KEY', None) else 'your-client-id'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET =os.environ.get('GOOGLE_OAUTH2_SECRET') if os.environ.get('GOOGLE_OAUTH2_SECRET', None) else 'your-client-secret'
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = os.environ.get('LINKEDIN_OAUTH2_KEY') if os.environ.get('LINKEDIN_OAUTH2_KEY', None) else 'your-client-id'
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = os.environ.get('LINKEDIN_OAUTH2_SECRET') if os.environ.get('LINKEDIN_OAUTH2_SECRET') else 'your-client-secret'
+SOCIAL_AUTH_FACEBOOK_OAUTH2_KEY = os.environ.get('FACEBOOK_OAUTH2_KEY') if os.environ.get('FACEBOOK_OAUTH2_KEY', None) else 'your-client-id'
+SOCIAL_AUTH_FACEBOOK_OAUTH2_SECRET = os.environ.get('FACEBOOK_OAUTH2_SECRET') if os.environ.get('FACEBOOK_OAUTH2_SECRET', None) else 'your-client-id'
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/polls/list/user/'

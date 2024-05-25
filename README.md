@@ -119,6 +119,34 @@ For detailed instructions, refer to Google's documentation on [OAuth 2.0](https:
 
 <p>Then go to http://127.0.0.1:8000 in your browser</p>
 
+## Run with Docker
+⚠️ Ensure that you have Docker installed before you proceed
+1. clone the repository : `https://github.com/devmahmud/Django-Poll-App.git`
+2. go to the directory : `cd Django-Poll-App`
+3. create an image : `docker build -t pollsapp:latest --no-cache .`
+4. run a container : `docker run --name pollsapp -p 8000:8000 -d pollsapp:latest`
+5. Then go to http://127.0.0.1:8000 in your browser
+### if you want to create some dummy text data follow the step below
+1. after you run a container : `docker exec -it pollsapp bash`
+2. install faker : `pip install faker`
+3. `python manage.py shell`
+4. `import seeder`
+5. create 5 dummy texts data : `seeder.seed_all(5)`
+### if you want to create super user
+1. after you run a container : `docker exec -it pollsapp bash`
+2. `python manage.py createsuperuser`
+#### for OAuth login , before you create an image, update the following settings in your Dockerfile
+```python
+    ENV GOOGLE_OAUTH2_KEY=your_client_id
+    ENV GOOGLE_OAUTH2_SECRET=your_client_secret
+    ENV LINKEDIN_OAUTH2_KEY=your_client_id
+    ENV LINKEDIN_OAUTH2_SECRET=your_client_secret
+    ENV FACEBOOK_OAUTH2_KEY=your_client_id
+    ENV FACEBOOK_OAUTH2_SECRET=your_client_secret
+ ```
+
+
+
 <h2>Project snapshot</h2>
 <h3>Home page</h3>
 <div align="center">
