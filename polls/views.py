@@ -39,6 +39,18 @@ def polls_list(request):
     }
     return render(request, 'polls/polls_list.html', context)
 
+@login_required()
+def dashboard(request):
+    polls = Poll.objects.all()
+    poll_data = []
+
+    for poll in polls:
+        unique_voters = Vote.objects.filter(poll=poll).values('user').distinct().count()
+        poll_data.append({'question': poll.text, 'unique_voters': unique_voters})
+
+    context = {'poll_data': poll_data}
+    return render(request, 'polls/dashboard.html', context)
+
 
 @login_required()
 def list_by_user(request):

@@ -165,6 +165,11 @@ For detailed instructions, refer to Google's documentation on [OAuth 2.0](https:
     <img src="https://user-images.githubusercontent.com/19981097/51410442-dc7d0e80-1b8e-11e9-8f8e-18e6d7bb70fb.png" width="100%"</img> 
 </div>
 
+<h3>Dsahboard Page</h3>
+<div align="center">
+<img width="100%" alt="dashboard" src="https://github.com/devmahmud/Django-Poll-App/assets/17628879/46bd5f4d-b236-44c4-8636-2e171e2173e5"> 
+</div>
+
 <h2>Author</h2>
 <blockquote>
   Mahmudul alam<br>

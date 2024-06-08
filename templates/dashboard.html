@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-sm-2">
+            <h1 class="text-center mb-5"> Dashboard</h1>
+    <div class="table-responsive"">
+            <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+                    <tr>
+                        <th>Poll Question</th>
+                        <th>Voters</th>
+                    </tr>
+                </thead>
+                 <tbody>
+                            {% for poll in poll_data %}
+        <tr>
+            <td>{{ poll.question }}</td>
+            <td>{{ poll.unique_voters }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+    </div>
+    </div>
+    </div>
+</div>
+
+{% endblock content %}
