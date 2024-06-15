@@ -143,3 +143,12 @@ SOCIAL_AUTH_FACEBOOK_OAUTH2_SECRET = 'your-client-secret'
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/polls/list/user/'
+
+# Configure email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'TBD'
+EMAIL_HOST_PASSWORD = 'TBD'
+DEFAULT_FROM_EMAIL = 'TBD'  # The email address you want to send from
