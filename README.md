@@ -29,6 +29,18 @@ Django poll app is a full featured polling app. You have to register in this app
 <code>seeder.seed_all(30)</code>
 <p>Here 30 is a number of entry. You can use it as your own</p>
 
+## Configure Email - Poll Owner receives Email when vote is cast by user
+
+- Get your smtp host details and replace following values in your `settings.py`
+
+```text
+# Configure email settings
+EMAIL_HOST = '<your smtp host>'
+EMAIL_PORT = '<smtp port>'
+EMAIL_HOST_USER = '<smtp host user>'
+EMAIL_HOST_PASSWORD = '<smtp host pass>'
+DEFAULT_FROM_EMAIL = '<from email address>'
+```
 <h2> Configuring OAuth login </h2>
 <details>
     <summary>Obtaining OAuth Client ID for Google</summary>
