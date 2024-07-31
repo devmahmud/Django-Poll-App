@@ -3,37 +3,49 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Count
 from django.contrib import messages
-from .models import Poll, Choice, Vote
+from .models import Poll, Choice, Vote, Category
 from .forms import PollAddForm, EditPollForm, ChoiceAddForm
 from django.http import HttpResponse
 
-
+@login_required()
 @login_required()
 def polls_list(request):
+    # Get the initial list of polls
     all_polls = Poll.objects.all()
+    categories = Category.objects.all()
     search_term = ''
-    if 'name' in request.GET:
-        all_polls = all_polls.order_by('text')
+    selected_category = request.GET.get('category', '')
 
-    if 'date' in request.GET:
-        all_polls = all_polls.order_by('pub_date')
+    # Apply category filter
+    if selected_category:
+        all_polls = all_polls.filter(category__name=selected_category)
 
-    if 'vote' in request.GET:
-        all_polls = all_polls.annotate(Count('vote')).order_by('vote__count')
-
+    # Apply search filter
     if 'search' in request.GET:
         search_term = request.GET['search']
         all_polls = all_polls.filter(text__icontains=search_term)
 
-    paginator = Paginator(all_polls, 6)  # Show 6 contacts per page
+    # Apply sort order
+    if 'name' in request.GET:
+        all_polls = all_polls.order_by('text')
+    elif 'date' in request.GET:
+        all_polls = all_polls.order_by('pub_date')
+    elif 'vote' in request.GET:
+        all_polls = all_polls.annotate(Count('vote')).order_by('vote__count')
+
+    # Pagination
+    paginator = Paginator(all_polls, 6)  # Show 6 polls per page
     page = request.GET.get('page')
     polls = paginator.get_page(page)
 
+    # Prepare URL parameters for pagination
     get_dict_copy = request.GET.copy()
     params = get_dict_copy.pop('page', True) and get_dict_copy.urlencode()
 
     context = {
         'polls': polls,
+        'categories': categories,
+        'selected_category': selected_category,
         'params': params,
         'search_term': search_term,
     }
@@ -233,3 +245,18 @@ def end_poll(request, poll_id):
         return render(request, 'polls/poll_result.html', {'poll': poll})
     else:
         return render(request, 'polls/poll_result.html', {'poll': poll})
+
+
+@login_required
+def list_by_category(request, category_name):
+    all_polls = Poll.objects.filter(category__name=category_name)
+    paginator = Paginator(all_polls, 6)  # Show 6 polls per page
+
+    page = request.GET.get('page')
+    polls = paginator.get_page(page)
+
+    context = {
+        'polls': polls,
+        'selected_category': category_name,
+    }
+    return render(request, 'polls/polls_list.html', context)

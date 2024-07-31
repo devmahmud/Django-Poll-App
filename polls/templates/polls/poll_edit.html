@@ -6,7 +6,6 @@
         <div class="col-md-6 offset-md-3">
             <h2>Edit poll</h2>
             {% if messages %}
-            {% if messages %}
             <div class="messages">
                 {% for message in messages %}
                 <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
@@ -16,7 +15,6 @@
                 </div>
                 {% endfor %}
             </div>
-            {% endif %}
             {% endif %}
             <form action="" method="POST">
                 {% csrf_token %}
@@ -37,8 +35,12 @@
                 <hr>
                 <ul class="list-group">
                     {% for choice in poll.choice_set.all %}
-                    <li class="list-group-item"><a href="{% url 'polls:choice_edit' choice.id %}"><i class="fas fa-pencil-alt"></i></a>&nbsp
-                        {{ choice.choice_text }}</li>
+                    <li class="list-group-item">
+                        <a href="{% url 'polls:choice_edit' choice.id %}">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>&nbsp
+                        {{ choice.choice_text }}
+                    </li>
                     {% endfor %}
                 </ul>
             </div>
