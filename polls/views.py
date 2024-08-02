@@ -211,8 +211,7 @@ def poll_vote(request, poll_id):
     if choice_id:
         choice = Choice.objects.get(id=choice_id)
         vote = Vote(user=request.user, poll=poll, choice=choice)
-        vote.save()
-        print(vote)
+        vote.save()        
 
         # get poll creator email
         poll_creator_email = poll.owner.email
@@ -220,8 +219,7 @@ def poll_vote(request, poll_id):
         subject = f'New vote for your poll: {poll.text}'
         message = f'A new vote has been cast for your poll "{poll.text}".'
         # Send the email
-        send_mail(subject, message, settings.EMAIL_HOST_USER, [poll_creator_email])
-        print("Mail sent successfully to" + poll.owner.email)
+        send_mail(subject, message, settings.EMAIL_HOST_USER, [poll_creator_email])       
 
         return render(request, 'polls/poll_result.html', {'poll': poll})
     else:
