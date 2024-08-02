@@ -6,7 +6,8 @@ from django.contrib import messages
 from .models import Poll, Choice, Vote
 from .forms import PollAddForm, EditPollForm, ChoiceAddForm
 from django.http import HttpResponse
-
+from django.core.mail import send_mail
+from django.conf import settings  # To access your email settings
 
 @login_required()
 def polls_list(request):
@@ -50,7 +51,6 @@ def dashboard(request):
 
     context = {'poll_data': poll_data}
     return render(request, 'polls/dashboard.html', context)
-
 
 @login_required()
 def list_by_user(request):
@@ -211,8 +211,16 @@ def poll_vote(request, poll_id):
     if choice_id:
         choice = Choice.objects.get(id=choice_id)
         vote = Vote(user=request.user, poll=poll, choice=choice)
-        vote.save()
-        print(vote)
+        vote.save()        
+
+        # get poll creator email
+        poll_creator_email = poll.owner.email
+        # Construct the email
+        subject = f'New vote for your poll: {poll.text}'
+        message = f'A new vote has been cast for your poll "{poll.text}".'
+        # Send the email
+        send_mail(subject, message, settings.EMAIL_HOST_USER, [poll_creator_email])       
+
         return render(request, 'polls/poll_result.html', {'poll': poll})
     else:
         messages.error(
