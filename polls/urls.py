@@ -17,4 +17,6 @@ urlpatterns = [
     path('<int:poll_id>/', views.poll_detail, name='detail'),
     path('<int:poll_id>/vote/', views.poll_vote, name='vote'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('chat/', views.chat_view, name='chat_view'),
+    path('chat_page/', views.chat_page, name='chat_page'),
 ]
