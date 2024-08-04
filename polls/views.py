@@ -8,6 +8,28 @@ from .forms import PollAddForm, EditPollForm, ChoiceAddForm
 from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.conf import settings  # To access your email settings
+import openai
+from django.http import JsonResponse
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+@login_required()
+@csrf_exempt
+def chat_view(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        message = data.get('message', '')
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[{"role": "user", "content": message}]
+        )
+        reply = response.choices[0].message['content']
+        return JsonResponse({'reply': reply})
+
+@login_required()
+def chat_page(request):
+    return render(request, 'chat.html')
 
 @login_required()
 def polls_list(request):

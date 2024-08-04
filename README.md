@@ -41,6 +41,26 @@ EMAIL_HOST_USER = '<smtp host user>'
 EMAIL_HOST_PASSWORD = '<smtp host pass>'
 DEFAULT_FROM_EMAIL = '<from email address>'
 ```
+## Getting an OpenAI API Key
+
+1. **Sign Up for an OpenAI Account:**
+   - Go to [OpenAI’s website](https://www.openai.com/) and sign up for an account if you don't have one.
+
+2. **Navigate to API Keys:**
+   - After logging in, go to the API section of your account by visiting [OpenAI API Keys](https://platform.openai.com/account/api-keys).
+
+3. **Create a New API Key:**
+   - Click on the "Create new key" button. A new API key will be generated for you.
+
+4. **Copy Your API Key:**
+   - Copy the API key to your clipboard. You will need this key to access OpenAI services.
+
+5. **Set Up Your Environment:**
+   - Add the API key to your environment variables. You can do this by setting an environment variable in your terminal or adding it to a `.env` file or add in settings.py . For example, you can set it in your `.env` file like this:
+     ```
+     OPENAI_API_KEY=your_api_key_here
+     ```
+
 <h2> Configuring OAuth login </h2>
 <details>
     <summary>Obtaining OAuth Client ID for Google</summary>

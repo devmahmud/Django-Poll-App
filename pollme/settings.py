@@ -152,3 +152,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'TBD'
 EMAIL_HOST_PASSWORD = 'TBD'
 DEFAULT_FROM_EMAIL = 'TBD'  # The email address you want to send from
+
+OPENAI_API_KEY = 'your_open_ai_key'

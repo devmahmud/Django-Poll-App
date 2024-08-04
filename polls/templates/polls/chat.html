@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+<form id="chatForm">
+  <textarea id="userInput"></textarea>
+  <button type="button" onclick="sendMessage()">Send</button>
+</form>
+<label id="responseLabel"></label>
+</div>
+<script>
+  function sendMessage() {
+    const text = document.getElementById('userInput').value;
+    fetch('/chat/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({message: text})
+    })
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('responseLabel').textContent = data.reply;
+    });
+  }
+</script>
+
+{% endblock content %}
