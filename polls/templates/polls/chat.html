@@ -1,9 +1,15 @@
-<!-- templates/chat.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container">
 <form id="chatForm">
   <textarea id="userInput"></textarea>
   <button type="button" onclick="sendMessage()">Send</button>
 </form>
 <label id="responseLabel"></label>
+</div>
 <script>
   function sendMessage() {
     const text = document.getElementById('userInput').value;
@@ -18,3 +24,5 @@
     });
   }
 </script>
+
+{% endblock content %}
