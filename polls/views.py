@@ -29,7 +29,7 @@ def chat_view(request):
 
 @login_required()
 def chat_page(request):
-    return render(request, 'chat.html')
+    return render(request, 'polls/chat.html')
 
 @login_required()
 def polls_list(request):
