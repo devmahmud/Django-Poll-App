@@ -21,7 +21,7 @@
 <script>
   function sendMessage() {
     const text = document.getElementById('userInput').value;
-    fetch('/chat/', {
+    fetch('/polls/chat/', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({message: text})
