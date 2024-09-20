@@ -30,7 +30,7 @@ def chat_view(request):
             model="gpt-4o-mini",
             messages=[{"role": "user", "content": message}]
         )
-        reply = response.choices[0].message['content']
+        reply = response.choices[0].message.content
         return JsonResponse({'reply': reply})
 
 @login_required()
