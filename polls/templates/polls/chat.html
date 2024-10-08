@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-sm-2">
+            <h1 class="text-center mb-5">Ask Open AI</h1>
+            <div class="table-responsive">
+                <form id="chatForm" class="form-group">
+                    <label for="userInput">Your Question:</label>
+                    <textarea id="userInput" class="form-control mb-3" rows="4" placeholder="What poll i can create on health care topic ?"></textarea>
+                    <button type="button" id="sendButton" class="btn btn-primary" onclick="sendMessage()">Send</button>
+                </form>
+                <label id="responseLabel" class="mt-3" style="white-space:pre-line"></label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+  function sendMessage() {
+    const text = document.getElementById('userInput').value;
+    
+    // Disable submit button
+    document.getElementById('sendButton').disabled = true;
+
+    fetch('/polls/chat/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({message: text})
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Clear input value
+      document.getElementById('userInput').value = '';
+      
+      document.getElementById('responseLabel').textContent = data.reply;
+    }).finally(() => {
+      // Enable submit button
+      document.getElementById('sendButton').disabled = false;
+    })
+  }
+</script>
+
+{% endblock content %}
