@@ -4,3 +4,5 @@ pytz==2020.5
 sqlparse==0.4.4
 social-auth-app-django>=0.4.0
 openai>=1.43.0
+psycopg2-binary==2.9.3
+gunicorn==20.1.0

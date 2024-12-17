@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - poll-db-volume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=poll
+      - POSTGRES_USER=fast
+      - POSTGRES_PASSWORD=1234qwer
+
+  app:
+    image: poll_app
+    environment:
+      - POSTGRES_DB=poll
+      - POSTGRES_USER=fast
+      - POSTGRES_PASSWORD=1234qwer
+      - POSTGRES_HOST=db
+    depends_on:
+      - db
+
+  web:
+    image: poll_web
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+
+volumes:
+  poll-db-volume:
+    external: true
+    name:
+      poll-db-volume
